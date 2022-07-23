@@ -32,8 +32,8 @@ class Task {
 
   factory Task.fromMap(Map<String, dynamic> json) => Task(
         id: json["id"],
-        title: json["title"],
-        note: json["note"],
+        title: json["title"].toString(),
+        note: json["note"].toString(),
         date: json["date"],
         startTime: json["startTime"],
         endTime: json["endTime"],

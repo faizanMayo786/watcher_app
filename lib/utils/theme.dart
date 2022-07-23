@@ -6,14 +6,14 @@ const Color bluishColor = Color(0xFF4e5ae8);
 const Color yellowColor = Color(0xFFFFB746);
 const Color pinkColor = Color(0xFFff4667);
 const Color whiteColor = Colors.white;
-const Color darGreyColor = Color(0xFF121212);
+const Color darkGreyColor = Color(0xFF121212);
 Color arkHeaderColor = Colors.grey.shade800;
 const primaryColor = bluishColor;
 
 class Themes {
   static final dark = ThemeData(
-    primaryColor: darGreyColor,
-    backgroundColor: darGreyColor,
+    primaryColor: darkGreyColor,
+    backgroundColor: darkGreyColor,
     brightness: Brightness.dark,
     // appBarTheme: AppBarTheme(
     //   backgroundColor: darGreyColor,
