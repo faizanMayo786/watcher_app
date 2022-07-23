@@ -203,7 +203,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
         "All fields are required !",
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.white,
-        icon: Icon(Icons.warning_amber_rounded),
+        colorText: pinkColor,
+        icon: Icon(
+          Icons.warning_amber_rounded,
+          color: Colors.red,
+        ),
       );
     }
   }
