@@ -3,28 +3,26 @@ import 'dart:convert';
 
 class Task {
   Task({
-    required this.id,
+    this.id,
     required this.title,
     required this.note,
-    required this.name,
     required this.date,
     required this.startTime,
     required this.endTime,
     required this.repeat,
-    required this.isComplete,
+    required this.isCompleted,
     required this.color,
     required this.remind,
   });
 
-  int id;
+  int? id;
   String title;
   String note;
-  String name;
   String date;
   String startTime;
   String endTime;
   String repeat;
-  int isComplete;
+  int isCompleted;
   int color;
   int remind;
 
@@ -36,26 +34,23 @@ class Task {
         id: json["id"],
         title: json["title"],
         note: json["note"],
-        name: json["name"],
         date: json["date"],
         startTime: json["startTime"],
         endTime: json["endTime"],
         repeat: json["repeat"],
-        isComplete: json["isComplete"],
+        isCompleted: json["isCompleted"],
         color: json["color"],
         remind: json["remind"],
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
         "title": title,
         "note": note,
-        "name": name,
         "date": date,
         "startTime": startTime,
         "endTime": endTime,
         "repeat": repeat,
-        "isComplete": isComplete,
+        "isCompleted": isCompleted,
         "color": color,
         "remind": remind,
       };
