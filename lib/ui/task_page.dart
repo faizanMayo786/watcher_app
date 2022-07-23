@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:task_schedular/controllers/task_controller.dart';
 import '../services/notification_services.dart';
 import 'add_task_page.dart';
 import 'widgets/button.dart';
@@ -20,6 +23,7 @@ class TaskView extends StatefulWidget {
 
 class _TaskViewState extends State<TaskView> {
   late NotifyHelper notifyHelper;
+  final TaskController _taskController = Get.put(TaskController());
   DateTime _selectedDate = DateTime.now();
   @override
   void initState() {
@@ -38,7 +42,29 @@ class _TaskViewState extends State<TaskView> {
         children: [
           _addTaskBar(),
           _addDateBar(),
+          _showTasks(),
         ],
+      ),
+    );
+  }
+
+  _showTasks() {
+    return Expanded(
+      child: Obx(
+        () {
+          return ListView.builder(
+            itemCount: _taskController.taskList.length,
+            itemBuilder: (context, index) {
+              print(_taskController.taskList.length.toString());
+              return Container(
+                margin: EdgeInsets.only(bottom: 10),
+                width: 100,
+                height: 50,
+                color: Colors.green,
+              );
+            },
+          );
+        },
       ),
     );
   }

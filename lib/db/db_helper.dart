@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:sqflite/sqflite.dart';
 
 import '../models/task.dart';
@@ -9,9 +11,10 @@ class DBHelper {
 
   static Future initDb() async {
     if (_db != null) {
+      return;
     } else {
       try {
-        print('Creating DB');
+        log('Creating DB');
         String _path = await getDatabasesPath() + 'tasks.db';
         _db = await openDatabase(
           _path,
@@ -22,13 +25,18 @@ class DBHelper {
             repeat STRING, color INTEGER, isCompleted INTEGER)"""),
         );
       } on Exception catch (e) {
-        print(e);
+        log(e.toString());
       }
     }
   }
 
   static Future<int> insert(Task? task) async {
-    print('insert');
+    log('insert');
     return await _db!.insert(_tableName, task!.toMap());
+  }
+
+  static Future<List<Map<String, dynamic>>> query() async {
+    log("query");
+    return await _db!.query(_tableName);
   }
 }
