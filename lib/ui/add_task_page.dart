@@ -5,7 +5,6 @@ import 'widgets/button.dart';
 import 'widgets/input_field.dart';
 import '../utils/theme.dart';
 
-
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
 
@@ -14,6 +13,8 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   String _endTime = DateFormat("hh:mm a")
@@ -43,8 +44,16 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 'Add Task',
                 style: headingStyle,
               ),
-              const MyInputField(title: 'Title', hint: 'Enter your title'),
-              const MyInputField(title: 'Note', hint: 'Enter your note'),
+              MyInputField(
+                title: 'Title',
+                hint: 'Enter your title',
+                controller: _titleController,
+              ),
+              MyInputField(
+                title: 'Note',
+                hint: 'Enter your note',
+                controller: _noteController,
+              ),
               MyInputField(
                 title: 'Date',
                 hint: DateFormat.yMd().format(_selectedDate),
@@ -170,7 +179,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _colorPallete(),
-                  MyButton(label: 'Create Task', onTap: () {}),
+                  MyButton(
+                    label: 'Create Task',
+                    onTap: () {
+                      _validate();
+                    },
+                  ),
                 ],
               )
             ],
@@ -179,7 +193,21 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
     );
   }
-_validate(){}
+
+  _validate() {
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
+      Get.back();
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+      Get.snackbar(
+        "Required",
+        "All fields are required !",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.white,
+        icon: Icon(Icons.warning_amber_rounded),
+      );
+    }
+  }
+
   Column _colorPallete() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
