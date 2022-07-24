@@ -301,7 +301,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
       actions: const [
         CircleAvatar(
-          backgroundColor: Colors.red,
+          backgroundColor: primaryColor,
+          child: Icon(
+            Icons.person,
+            color: Colors.white,
+          ),
         ),
         SizedBox(width: 20),
       ],
