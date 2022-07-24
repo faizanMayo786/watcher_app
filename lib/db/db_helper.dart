@@ -6,8 +6,8 @@ import '../models/task.dart';
 
 class DBHelper {
   static Database? _db;
-  static final int _version = 1;
-  static final String _tableName = 'tasks';
+  static const int _version = 1;
+  static const String _tableName = 'tasks';
 
   static Future initDb() async {
     if (_db != null) {
@@ -15,6 +15,7 @@ class DBHelper {
     } else {
       try {
         log('Creating DB');
+        // ignore: no_leading_underscores_for_local_identifiers, prefer_interpolation_to_compose_strings
         String _path = await getDatabasesPath() + 'tasks.db';
         _db = await openDatabase(
           _path,

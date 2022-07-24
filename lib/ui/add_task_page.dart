@@ -1,8 +1,11 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously, unnecessary_null_comparison
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:task_schedular/controllers/task_controller.dart';
-import 'package:task_schedular/models/task.dart';
+import '/controllers/task_controller.dart';
+import '/models/task.dart';
 import 'widgets/button.dart';
 import 'widgets/input_field.dart';
 import '../utils/theme.dart';
@@ -145,7 +148,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               ),
               MyInputField(
                 title: 'Repeat',
-                hint: '$_selectedRepeat',
+                hint: _selectedRepeat,
                 widget: DropdownButton(
                   icon: const Icon(
                     Icons.keyboard_arrow_down_rounded,
@@ -209,7 +212,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.white,
         colorText: pinkColor,
-        icon: Icon(
+        icon: const Icon(
           Icons.warning_amber_rounded,
           color: Colors.red,
         ),
@@ -230,7 +233,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
       color: _selectedColor,
       remind: _selectedRemind,
     ));
-    print("My ID is: " + value.toString());
+    if (kDebugMode) {
+      print("My ID is: $value");
+    }
   }
 
   Column _colorPallete() {
@@ -294,11 +299,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
-      actions: [
-        const CircleAvatar(
+      actions: const [
+        CircleAvatar(
           backgroundColor: Colors.red,
         ),
-        const SizedBox(width: 20),
+        SizedBox(width: 20),
       ],
     );
   }

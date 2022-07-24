@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import '../../utils/theme.dart';
 
@@ -21,7 +18,7 @@ class MyInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(top: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,8 +27,8 @@ class MyInputField extends StatelessWidget {
             style: titleStyle,
           ),
           Container(
-            margin: EdgeInsets.only(top: 8),
-            padding: EdgeInsets.only(left: 14),
+            margin: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(left: 14),
             height: 52,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey, width: 1.0),

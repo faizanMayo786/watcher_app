@@ -1,16 +1,14 @@
-import 'dart:developer';
 
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:task_schedular/controllers/task_controller.dart';
-import 'package:task_schedular/models/task.dart';
-import 'package:task_schedular/ui/widgets/task_tile.dart';
+import '../controllers/task_controller.dart';
+import '../models/task.dart';
+import 'widgets/task_tile.dart';
 import '../services/notification_services.dart';
 import 'add_task_page.dart';
 import 'widgets/button.dart';
@@ -61,7 +59,9 @@ class _TaskViewState extends State<TaskView> {
           return ListView.builder(
             itemCount: _taskController.taskList.length,
             itemBuilder: (context, index) {
-              print(_taskController.taskList.length.toString());
+              if (kDebugMode) {
+                print(_taskController.taskList.length.toString());
+              }
               Task taskList = _taskController.taskList[index];
               // return (taskList.date == DateFormat.yMd().format(_selectedDate))
               if (taskList.repeat == 'Daily') {
@@ -70,7 +70,7 @@ class _TaskViewState extends State<TaskView> {
                 var myTime = DateFormat("HH:mm").format(date);
                 notifyHelper.scheduledNotification(
                   int.parse(myTime.toString().split(":")[0]),
-                  
+
                   int.parse(myTime.toString().split(":")[1]),
                   taskList,
                 );
@@ -209,11 +209,11 @@ class _TaskViewState extends State<TaskView> {
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
-      actions: [
-        const CircleAvatar(
+      actions: const [
+        CircleAvatar(
           backgroundColor: Colors.red,
         ),
-        const SizedBox(width: 20),
+        SizedBox(width: 20),
       ],
     );
   }

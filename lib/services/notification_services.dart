@@ -1,9 +1,12 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:get/get.dart';
-import 'package:task_schedular/ui/notified_page.dart';
+import '/ui/notified_page.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -53,13 +56,23 @@ class NotifyHelper {
 
   onSelectedNotification(String? payload) async {
     if (payload != null) {
-      print('notification payload: $payload');
+      if (kDebugMode) {
+        print('notification payload: $payload');
+      }
     } else {
-      print("Notification Done");
+      if (kDebugMode) {
+        print("Notification Done");
+      }
     }
-    Get.to(
-      () =>NotifiedPage()
-    );
+    if (payload == "Theme Changed") {
+      if (kDebugMode) {
+        print("Nothing to Navigate");
+      }
+    } else {
+      Get.to(
+        () => NotifiedPage(label: payload!),
+      );
+    }
   }
 
   scheduledNotification(int hour, int minute, Task task) async {
@@ -77,11 +90,17 @@ class NotifyHelper {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
-        payload: "${task.title}|" + "${task.note}}|");
+        // ignore: prefer_interpolation_to_compose_strings, prefer_adjacent_string_concatenation
+        payload: "${task.title}|" +
+            "${task.note}|" +
+            "${task.date}|" +
+            "${task.color}|");
   }
 
   displayNotification({required String title, required String body}) async {
-    print("doing test");
+    if (kDebugMode) {
+      print("doing test");
+    }
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
         '1', 'Theme Mode',
         importance: Importance.max, priority: Priority.high);
@@ -96,7 +115,7 @@ class NotifyHelper {
       title,
       body,
       platformChannelSpecifics,
-      payload: 'It could be anything you pass',
+      payload: title,
     );
   }
 
@@ -108,15 +127,12 @@ class NotifyHelper {
 
   tz.TZDateTime _convertTime(int hour, int minutes) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    print(now);
-    print(hour);
-    print(minutes);
+
     tz.TZDateTime scheduleTime =
         tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minutes);
     if (scheduleTime.isBefore(now)) {
       scheduleTime = scheduleTime.add(const Duration(days: 1));
     }
-    print(scheduleTime);
     return scheduleTime;
   }
 }

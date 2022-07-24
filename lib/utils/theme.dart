@@ -24,6 +24,7 @@ class Themes {
     backgroundColor: Colors.white,
     primaryColor: primaryColor,
     brightness: Brightness.light,
+    
     // appBarTheme: AppBarTheme(
     //   backgroundColor: primaryColor,
     // ),

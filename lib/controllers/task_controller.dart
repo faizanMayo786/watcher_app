@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:task_schedular/db/db_helper.dart';
-import 'package:task_schedular/models/task.dart';
+import '../db/db_helper.dart';
+import '../models/task.dart';
 
 class TaskController extends GetxController {
   var taskList = <Task>[].obs;
@@ -21,7 +21,6 @@ class TaskController extends GetxController {
 
   void delete(Task task) async {
     var val = await DBHelper.delete(task);
-    print(val);
     if (val == 1) {
       taskList.remove(task);
     }
