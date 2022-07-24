@@ -207,15 +207,40 @@ class _TaskViewState extends State<TaskView> {
                     : Colors.grey.shade300,
               ),
             ),
+            Spacer(),
             task.isCompleted == 1
                 ? Container()
                 : _bottomButton(
                     label: "Task Completed",
                     onTap: () {
+                      _taskController.markTaskCompleted(task);
                       Get.back();
                     },
                     color: primaryColor,
-                    context: context),
+                    context: context,
+                  ),
+            _bottomButton(
+              label: "Delete Task",
+              onTap: () {
+                _taskController.delete(task);
+                Get.back();
+              },
+              color: Colors.red.shade300,
+              context: context,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            _bottomButton(
+              label: "Close",
+              onTap: () {
+                Get.back();
+              },
+              color: Colors.red.shade300,
+              context: context,
+              isClose: true,
+            ),
+            SizedBox(height: 10),
           ],
         ),
       ),
@@ -235,12 +260,22 @@ class _TaskViewState extends State<TaskView> {
         height: 55,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
-          color: isClose == true ? Colors.red : color,
+          color: isClose == true ? Colors.transparent : color,
           border: Border.all(
-            color: isClose == true ? Colors.red : color,
+            color: isClose == true
+                ? Get.isDarkMode
+                    ? Colors.grey.shade600
+                    : Colors.grey.shade300
+                : color,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(20),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          style:
+              isClose ? titleStyle : titleStyle.copyWith(color: Colors.white),
         ),
       ),
     );

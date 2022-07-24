@@ -26,4 +26,22 @@ class TaskController extends GetxController {
       taskList.remove(task);
     }
   }
+
+  markTaskCompleted(Task task) async {
+    int val = await DBHelper.update(task.id!);
+    if (val == 1) {
+      taskList[taskList.indexWhere((element) => element.id == task.id)] = Task(
+        id: task.id,
+        title: task.title,
+        note: task.note,
+        date: task.date,
+        startTime: task.startTime,
+        endTime: task.endTime,
+        repeat: task.repeat,
+        isCompleted: 1,
+        color: task.color,
+        remind: task.remind,
+      );
+    }
+  }
 }
