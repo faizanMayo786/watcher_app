@@ -45,7 +45,7 @@ class _TaskViewState extends State<TaskView> {
         children: [
           _addTaskBar(),
           _addDateBar(),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           _showTasks(),
@@ -62,23 +62,55 @@ class _TaskViewState extends State<TaskView> {
             itemCount: _taskController.taskList.length,
             itemBuilder: (context, index) {
               print(_taskController.taskList.length.toString());
-              var taskList = _taskController.taskList[index];
-              return AnimationConfiguration.staggeredList(
-                position: index,
-                child: SlideAnimation(
-                  child: FadeInAnimation(
-                      child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          _showBottomSheet(context, taskList);
-                        },
-                        child: TaskTile(taskList),
-                      )
-                    ],
-                  )),
-                ),
-              );
+              Task taskList = _taskController.taskList[index];
+              // return (taskList.date == DateFormat.yMd().format(_selectedDate))
+              if (taskList.repeat == 'Daily') {
+                DateTime date =
+                    DateFormat.jm().parse(taskList.startTime.toString());
+                var myTime = DateFormat("HH:mm").format(date);
+                notifyHelper.scheduledNotification(
+                  int.parse(myTime.toString().split(":")[0]),
+                  
+                  int.parse(myTime.toString().split(":")[1]),
+                  taskList,
+                );
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: SlideAnimation(
+                    child: FadeInAnimation(
+                        child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            _showBottomSheet(context, taskList);
+                          },
+                          child: TaskTile(taskList),
+                        )
+                      ],
+                    )),
+                  ),
+                );
+              }
+              if (taskList.date == DateFormat.yMd().format(_selectedDate)) {
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: SlideAnimation(
+                    child: FadeInAnimation(
+                        child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            _showBottomSheet(context, taskList);
+                          },
+                          child: TaskTile(taskList),
+                        )
+                      ],
+                    )),
+                  ),
+                );
+              } else {
+                return Container();
+              }
             },
           );
         },
@@ -88,43 +120,42 @@ class _TaskViewState extends State<TaskView> {
 
   Container _addDateBar() {
     return Container(
-      margin: EdgeInsets.only(top: 20, left: 20),
-      child: DatePicker(
-        DateTime.now(),
-        height: 100,
-        width: 80,
-        initialSelectedDate: DateTime.now(),
-        selectionColor: primaryColor,
-        dateTextStyle: GoogleFonts.lato(
-          textStyle: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: Colors.grey,
+      margin: const EdgeInsets.only(top: 20, left: 20),
+      child: DatePicker(DateTime.now(),
+          height: 100,
+          width: 80,
+          initialSelectedDate: DateTime.now(),
+          selectionColor: primaryColor,
+          dateTextStyle: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        dayTextStyle: GoogleFonts.lato(
-          textStyle: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.grey,
+          dayTextStyle: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        monthTextStyle: GoogleFonts.lato(
-          textStyle: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Colors.grey,
+          monthTextStyle: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        selectedTextColor: Colors.white,
-        onDateChange: (selectedDate) => _selectedDate = selectedDate,
-      ),
+          selectedTextColor: Colors.white,
+          onDateChange: (selectedDate) =>
+              setState(() => _selectedDate = selectedDate)),
     );
   }
 
   Container _addTaskBar() {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         left: 20,
         right: 20,
         top: 20,
@@ -148,7 +179,7 @@ class _TaskViewState extends State<TaskView> {
           MyButton(
             label: '+ Add Task',
             onTap: () async {
-              await Get.to(() => AddTaskPage());
+              await Get.to(() => const AddTaskPage());
               _taskController.getTask();
             },
           ),
@@ -179,7 +210,7 @@ class _TaskViewState extends State<TaskView> {
         ),
       ),
       actions: [
-        CircleAvatar(
+        const CircleAvatar(
           backgroundColor: Colors.red,
         ),
         const SizedBox(width: 20),
@@ -190,7 +221,7 @@ class _TaskViewState extends State<TaskView> {
   void _showBottomSheet(BuildContext context, Task task) {
     Get.bottomSheet(
       Container(
-        padding: EdgeInsets.only(top: 4),
+        padding: const EdgeInsets.only(top: 4),
         height: task.isCompleted == 1
             ? MediaQuery.of(context).size.height * 0.24
             : MediaQuery.of(context).size.height * 0.32,
@@ -207,7 +238,7 @@ class _TaskViewState extends State<TaskView> {
                     : Colors.grey.shade300,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             task.isCompleted == 1
                 ? Container()
                 : _bottomButton(
@@ -228,7 +259,7 @@ class _TaskViewState extends State<TaskView> {
               color: Colors.red.shade300,
               context: context,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             _bottomButton(
@@ -240,7 +271,7 @@ class _TaskViewState extends State<TaskView> {
               context: context,
               isClose: true,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
@@ -256,7 +287,7 @@ class _TaskViewState extends State<TaskView> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         height: 55,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
