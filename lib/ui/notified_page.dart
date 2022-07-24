@@ -84,7 +84,12 @@ class NotifiedPage extends StatelessWidget {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text(label.toString().split('|')[1]),
+                      Text(
+                        label.toString().split('|')[0],
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -107,7 +112,12 @@ class NotifiedPage extends StatelessWidget {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text(label.toString().split('|')[1]),
+                      Text(
+                        label.toString().split('|')[1],
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -130,7 +140,12 @@ class NotifiedPage extends StatelessWidget {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text(label.toString().split('|')[2]),
+                      Text(
+                        label.toString().split('|')[2],
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),

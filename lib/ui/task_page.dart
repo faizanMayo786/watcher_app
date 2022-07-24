@@ -209,11 +209,15 @@ class _TaskViewState extends State<TaskView> {
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
-      actions: const [
+      actions:const [
         CircleAvatar(
-          backgroundColor: Colors.red,
+          backgroundColor: primaryColor,
+          child: Icon(
+            Icons.person,
+            color: Colors.white,
+          ),
         ),
-        SizedBox(width: 20),
+         SizedBox(width: 20),
       ],
     );
   }
