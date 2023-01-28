@@ -15,11 +15,14 @@ Watcher is developed in Flutter Framework for CrossPlatform. Watcher allows you 
 
 ### ScreenShots
 #### Task Screen 
+##### Light Mode
+##### Dark Mode 
 <p>
-<img src="https://user-images.githubusercontent.com/89972827/180660481-205be987-c937-47e7-81a6-73dc7d4af6c5.png" title="light" **alt="light" width="40" height="40"/>&nbsp;
+<img src="https://user-images.githubusercontent.com/89972827/180660481-205be987-c937-47e7-81a6-73dc7d4af6c5.png" title="light" **alt="light"  height="250"/>&nbsp;
+<img src=" https://user-images.githubusercontent.com/89972827/180660529-5a82566b-7ea1-4437-abc4-1d01ff44a1d4.png" title="light" **alt="light"  height="250"/>&nbsp;
 </p>
-##### Light Mode ![Screenshot_1658685941](https://user-images.githubusercontent.com/89972827/180660481-205be987-c937-47e7-81a6-73dc7d4af6c5.png)
-##### Dark Mode ![Screenshot_1658685945](https://user-images.githubusercontent.com/89972827/180660529-5a82566b-7ea1-4437-abc4-1d01ff44a1d4.png)
+
+
 
 #### Add Task Screen 
 ##### Light Mode ![Screenshot_1658685959](https://user-images.githubusercontent.com/89972827/180660542-30d5d5e8-6c2a-491f-a595-6e8a124d6c2e.png)
